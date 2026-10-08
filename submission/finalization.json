@@ -1,0 +1,12 @@
+{
+  "student_name": "Nguyễn Nhân Sâm",
+  "student_id": "2A202602672",
+  "student_class": "3A",
+  "course": "IV",
+  "updated_at": "2026-10-08T11:14:44.039083+00:00",
+  "reflection_sha256": "0c20a9f6bb3b510768067b7935e1537c7ddae2aa176fd9e3ad66f677c113bbc0",
+  "presentation_figure_sha256": "d6d60c9efbf0f4afd622b61c4df13bea8cf4dc5598c581ee85e008e799389423",
+  "original_source_manifest_preserved": true,
+  "training_and_judge_outputs_changed": false,
+  "note": "Report filled after run; NB4 table reformatted from original records. Original files retained."
+}

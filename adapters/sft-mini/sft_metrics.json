@@ -1,0 +1,98 @@
+{
+  "base_model": "unsloth/Qwen3-4B-Instruct-2507-unsloth-bnb-4bit",
+  "dataset": "saillab/alpaca-vietnamese-cleaned",
+  "train_samples": 1000,
+  "seed": 42,
+  "max_len": 768,
+  "epochs": 1,
+  "train_seconds": 642.1643535999999,
+  "peak_allocated_gb": 4.573031424,
+  "peak_reserved_gb": 4.764729344,
+  "final_train_loss": 1.360468807220459,
+  "loss_history": [
+    {
+      "loss": 1.8841487884521484,
+      "grad_norm": 0.7275472283363342,
+      "learning_rate": 0.00019915854864676664,
+      "epoch": 0.08,
+      "step": 10
+    },
+    {
+      "loss": 1.3935338020324708,
+      "grad_norm": 0.5185958743095398,
+      "learning_rate": 0.0001925116643538684,
+      "epoch": 0.16,
+      "step": 20
+    },
+    {
+      "loss": 1.417680549621582,
+      "grad_norm": 0.4518836438655853,
+      "learning_rate": 0.0001796634556457236,
+      "epoch": 0.24,
+      "step": 30
+    },
+    {
+      "loss": 1.3047703742980956,
+      "grad_norm": 0.5164963603019714,
+      "learning_rate": 0.0001614751751104301,
+      "epoch": 0.32,
+      "step": 40
+    },
+    {
+      "loss": 1.3265127182006835,
+      "grad_norm": 0.4622425436973572,
+      "learning_rate": 0.00013916603579471705,
+      "epoch": 0.4,
+      "step": 50
+    },
+    {
+      "loss": 1.399449920654297,
+      "grad_norm": 0.573919415473938,
+      "learning_rate": 0.00011423148382732853,
+      "epoch": 0.48,
+      "step": 60
+    },
+    {
+      "loss": 1.290640926361084,
+      "grad_norm": 0.4360596537590027,
+      "learning_rate": 8.83429543400241e-05,
+      "epoch": 0.56,
+      "step": 70
+    },
+    {
+      "loss": 1.2957747459411622,
+      "grad_norm": 0.5377365946769714,
+      "learning_rate": 6.323583033672799e-05,
+      "epoch": 0.64,
+      "step": 80
+    },
+    {
+      "loss": 1.2526121139526367,
+      "grad_norm": 0.500186562538147,
+      "learning_rate": 4.059311495186338e-05,
+      "epoch": 0.72,
+      "step": 90
+    },
+    {
+      "loss": 1.277165126800537,
+      "grad_norm": 0.51861572265625,
+      "learning_rate": 2.1932614882827197e-05,
+      "epoch": 0.8,
+      "step": 100
+    },
+    {
+      "loss": 1.2944465637207032,
+      "grad_norm": 0.5474437475204468,
+      "learning_rate": 8.505197417404687e-06,
+      "epoch": 0.88,
+      "step": 110
+    },
+    {
+      "loss": 1.283578586578369,
+      "grad_norm": 0.5889869928359985,
+      "learning_rate": 1.2109411818274852e-06,
+      "epoch": 0.96,
+      "step": 120
+    }
+  ]
+}

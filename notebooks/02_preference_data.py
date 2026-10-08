@@ -96,7 +96,12 @@ import json
 train_ds.to_parquet(str(C.PREF_DIR / "train.parquet"))
 eval_ds.to_parquet(str(C.PREF_DIR / "eval.parquet"))
 (C.PREF_DIR / "stats.json").write_text(
-    json.dumps({"dataset": C.PREF_DATASET, "language": C.PREF_LANGUAGE, **stats}, ensure_ascii=False, indent=2)
+    json.dumps({"dataset": C.PREF_DATASET, "language": C.PREF_LANGUAGE, "seed": C.SEED,
+                "max_len": C.MAX_LEN, "train_pairs": len(train_ds), "eval_pairs": len(eval_ds),
+                **stats}, ensure_ascii=False, indent=2), encoding="utf-8"
+)
+(C.PREF_DIR / "samples.json").write_text(
+    json.dumps(list(train_ds.select(range(min(3, len(train_ds))))), ensure_ascii=False, indent=2), encoding="utf-8"
 )
 print(f"Saved {len(train_ds)} train / {len(eval_ds)} eval pairs → {C.PREF_DIR}")
 

@@ -1,0 +1,17 @@
+{
+  "source_file": "C:\\Users\\SAM\\Downloads\\Lab22_DPO_T4_Core.ipynb",
+  "destination": "C:\\Users\\SAM\\IdeaProjects\\VinUniAIThucChien\\Lap 22\\K4-L3-Track3-Day22-DPO-ORPO-Alignment\\colab\\Lab22_DPO_T4_executed.ipynb",
+  "sha256": "bda9f1e5a387c9d2ea05b6b6642152baf394744eeef79c0d0ea87ef396586384",
+  "nbformat_validation_passed": true,
+  "total_cells": 86,
+  "code_cells": 46,
+  "executed_code_cells": 46,
+  "cells_with_outputs": 44,
+  "error_outputs": 0,
+  "source_matches_original_core_snapshot_except_added_finalization_cell": true,
+  "finalization_cell_execution_count": 46,
+  "full_verify_exit0_in_notebook": true,
+  "historical_verify_exit1_preserved": true,
+  "common_secret_token_patterns_found": 0,
+  "note": "The finalization cell is visually near the top but execution count46 confirms it followed the original run (45 cells). Original exit1 log due template remains as historical output; latest verify succeeded."
+}

@@ -59,8 +59,8 @@ print(f"sum log p = {total.item():.3f}   mean log p = {mean.item():.3f}")
 # %%
 def my_dpo_loss(pc, pr, rc, rr, beta=0.1):
     """pc/pr: policy log-prob chosen/rejected; rc/rr: reference. Trả về loss trung bình."""
-    # TODO: viết bằng torch.nn.functional.logsigmoid
-    return None
+    margin = beta * ((pc - rc) - (pr - rr))
+    return -torch.nn.functional.logsigmoid(margin).mean()
 
 
 # %%
@@ -68,11 +68,9 @@ pc, pr = torch.tensor([-12.0, -30.0]), torch.tensor([-15.0, -28.0])
 rc, rr = torch.tensor([-13.0, -29.0]), torch.tensor([-14.0, -29.0])
 ref_loss, _, _ = M.dpo_loss(pc, pr, rc, rr, beta=0.1)
 mine = my_dpo_loss(pc, pr, rc, rr, beta=0.1)
-if mine is None:
-    print(f"Chưa cài my_dpo_loss. Đáp số tham chiếu: {ref_loss.item():.4f}")
-else:
-    assert torch.allclose(torch.as_tensor(mine), ref_loss, atol=1e-6), (mine, ref_loss)
-    print(f"✓ Khớp tham chiếu: {ref_loss.item():.4f}")
+assert mine is not None, "my_dpo_loss phải trả về loss, không được bỏ qua bài tập"
+assert torch.allclose(mine, ref_loss, atol=1e-6), (mine, ref_loss)
+print(f"✓ Khớp tham chiếu: {ref_loss.item():.4f}")
 
 # %% [markdown]
 # ## 3. Bước 0: mô hình đang học (policy) = reference ⇒ loss = log 2
@@ -84,6 +82,8 @@ else:
 # %%
 same = torch.tensor([-20.0, -35.0])
 loss0, cr0, rr0 = M.dpo_loss(same, same - 3, same, same - 3)
+student_loss0 = my_dpo_loss(same, same - 3, same, same - 3)
+assert math.isclose(student_loss0.item(), math.log(2), abs_tol=1e-6)
 print(f"loss at init = {loss0.item():.4f}   log 2 = {math.log(2):.4f}   rewards = {cr0.tolist()}, {rr0.tolist()}")
 
 # %% [markdown]
@@ -148,3 +148,19 @@ print(f"ORPO  {M.orpo_loss(avg_c, avg_r, -avg_c).item():.4f}")
 # **Câu hỏi cho REFLECTION §3:** tổng log-prob của câu dài luôn âm hơn câu ngắn.
 # Vì sao điều đó khiến DPO gốc dễ thiên vị độ dài, và SimPO/ORPO xử lý bằng cách nào?
 # Gợi ý: NB2 in ra tỉ lệ cặp có chosen dài hơn rejected trong dữ liệu tiếng Việt.
+
+# %% [markdown]
+# ## Trả lời: vì sao margin tăng trong khi chosen giảm?
+#
+# DPO tối ưu chênh lệch log-xác suất tương đối với reference, không tối ưu riêng
+# xác suất tuyệt đối của câu chosen. Với β = 1, nếu reward chosen giảm từ 0 xuống
+# −3 nhưng reward rejected giảm xuống −5, margin vẫn tăng từ 0 lên 2. Kịch bản
+# chosen tăng 1 và rejected giảm 1 cũng có margin 2 và cùng loss khoảng 0.127.
+# Vì vậy loss giảm hoặc margin tăng chưa chứng minh rằng mô hình tăng xác suất
+# câu tốt; phải nhìn riêng cả chosen và rejected. Đây là likelihood displacement.
+# Khi huấn luyện thật, còn phải kiểm tra các đường held-out để phân biệt cải thiện
+# khả năng khái quát với việc học thuộc dữ liệu train. RPO thêm loss có giám sát
+# trên chosen nên có thể hạn chế việc đẩy xác suất chosen xuống. Tổng log-prob
+# cộng qua các token cũng chịu ảnh hưởng độ dài; chuẩn hoá theo số token như
+# một số biến thể giúp điều chỉnh ảnh hưởng này, nhưng kết luận về thiên vị phải
+# dựa trên phép đo NB2 và NB4 chứ không chỉ dựa vào công thức.
