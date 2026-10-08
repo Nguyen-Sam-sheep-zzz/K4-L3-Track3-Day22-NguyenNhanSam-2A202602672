@@ -103,7 +103,16 @@ trainer = train_on_responses_only(
     instruction_part="<|im_start|>user\n",
     response_part="<|im_start|>assistant\n",
 )
+import time
+
+torch.cuda.reset_peak_memory_stats()
+torch.cuda.synchronize()
+sft_started = time.perf_counter()
 result = trainer.train()
+torch.cuda.synchronize()
+sft_seconds = time.perf_counter() - sft_started
+sft_peak_allocated_gb = torch.cuda.max_memory_allocated() / 1e9
+sft_peak_reserved_gb = torch.cuda.max_memory_reserved() / 1e9
 print(f"Final SFT loss: {result.training_loss:.4f}")
 
 # %%
@@ -129,6 +138,18 @@ model.save_pretrained(str(C.SFT_ADAPTER))
 tokenizer.save_pretrained(str(C.SFT_ADAPTER))
 model.save_pretrained_merged(str(C.SFT_MERGED), tokenizer, save_method="merged_16bit")
 print(f"Saved adapter → {C.SFT_ADAPTER}\nSaved merged 16-bit → {C.SFT_MERGED}")
+
+import json
+
+(C.SFT_ADAPTER / "sft_metrics.json").write_text(
+    json.dumps({
+        "base_model": C.BASE_MODEL, "dataset": C.SFT_DATASET, "train_samples": len(ds),
+        "seed": C.SEED, "max_len": C.MAX_LEN, "epochs": 1,
+        "train_seconds": sft_seconds, "peak_allocated_gb": sft_peak_allocated_gb,
+        "peak_reserved_gb": sft_peak_reserved_gb, "final_train_loss": float(result.training_loss),
+        "loss_history": [r for r in trainer.state.log_history if "loss" in r],
+    }, ensure_ascii=False, indent=2), encoding="utf-8"
+)
 
 # %%
 sample = MD.generate(model, tokenizer, ["Giải thích ngắn gọn (3-4 câu) thuật toán quicksort hoạt động thế nào."], 200)

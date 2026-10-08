@@ -1,0 +1,22 @@
+{
+  "tests_exit_code": 0,
+  "tests_passed": 70,
+  "verify_exit_code": 1,
+  "local_verify_blockers": [
+    "merged SFT model excluded from evidence ZIP",
+    "Colab absolute reference differs from Windows checkout"
+  ],
+  "gpu_training_done": true,
+  "api_live_verified_in_colab": true,
+  "evidence_audit_passed": true,
+  "reflection_completed": true,
+  "executed_nb1_nb4_received": true,
+  "full_colab_verify_exit_code_received": 0,
+  "repository_renamed": true,
+  "committed": false,
+  "pushed_lab_changes": false,
+  "lms_submission_confirmed": false,
+  "final_evidence_received": true,
+  "executed_notebook_audit_passed": true,
+  "local_core_evidence_complete": true
+}

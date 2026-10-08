@@ -1,0 +1,31 @@
+{
+  "source_zip_sha256": "da9f8b5197880222f424b09fd717173777377482c809c4624541c89b74a9f85b",
+  "source_manifest_matches_before_reflection_edit": true,
+  "matched_source_files": 40,
+  "train_pairs": 800,
+  "eval_pairs": 100,
+  "train_distinct_prompts": 800,
+  "eval_distinct_prompts": 100,
+  "train_eval_prompt_overlap": 0,
+  "split_fingerprint_matches": true,
+  "output_rows": 58,
+  "heldout_judged": 50,
+  "heldout_belongs_to_eval": true,
+  "outputs_sha256": "a4a292bd306942511d297ad0d282b146586216a26a52548edfdbc7404b343c35",
+  "raw_votes_and_summary_recomputed": true,
+  "api_failed_pairs": 0,
+  "identical_answers": 36,
+  "identical_by_category": {
+    "heldout": 33,
+    "helpfulness": 2,
+    "safety": 1
+  },
+  "answers_with_tool_markers": {
+    "sft": 58,
+    "dpo": 58
+  },
+  "sanity_accuracy_recorded": 1.0,
+  "executed_nb1_nb4_received": false,
+  "full_colab_verify_exit_code_received": 1,
+  "judge_cost_and_token_usage_measured": false
+}

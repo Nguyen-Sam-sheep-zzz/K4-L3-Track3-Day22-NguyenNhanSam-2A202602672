@@ -159,11 +159,14 @@ plt.show()
 
 # %%
 provider = C.JUDGE_PROVIDER
+if os.environ.get("JUDGE_REQUIRE_API") == "1":
+    J.require_api_judge(provider, C.JUDGE_MODEL)
 if provider != "rm" and not J.has_judge_key(provider):
     print(f"JUDGE_PROVIDER={provider} but its API key is missing → local reward-model panel.")
     provider = "rm"
 
 sanity, per_judge = {}, {}
+api_sanity = None
 if provider == "rm":
     for name in C.JUDGE_RM_MODELS:
         score = J.make_rm_scorer(name)
@@ -182,8 +185,13 @@ if provider == "rm":
     ]
     judge_name, kind = "rm-panel:" + "+".join(panel), "rm"
 else:
-    call = J.make_caller(provider, C.JUDGE_MODEL)
-    judged = [{**r, **J.judge_pair(r["prompt"], r["sft"], r["dpo"], call)} for r in records]
+    call = J.make_caller(provider, C.JUDGE_MODEL, max_tokens=int(os.environ.get("JUDGE_MAX_TOKENS", "4096")))
+    api_sanity = J.api_sanity_accuracy(call)
+    print(f"API sanity: {api_sanity}")
+    judged = []
+    for i, r in enumerate(records, 1):
+        judged.append({**r, **J.judge_pair(r["prompt"], r["sft"], r["dpo"], call)})
+        print(f"API judge {i}/{len(records)}: {judged[-1]['winner']}", flush=True)
     judge_name, kind = f"{provider}:{C.JUDGE_MODEL}", "api"
 (C.EVAL_DIR / f"judge_results_{kind}.json").write_text(
     json.dumps(
@@ -208,8 +216,8 @@ summary = {
     "judge": judge_name,
     "outputs_sha256": OUTPUTS_SHA,
     # The weakest panel member; verify.py warns below 0.8.
-    "sanity_accuracy": min(sanity[n] for n in panel) if sanity else None,
-    "sanity": sanity or None,
+    "sanity_accuracy": min(sanity[n] for n in panel) if sanity else (api_sanity or {}).get("accuracy"),
+    "sanity": sanity or api_sanity,
     **splits(judged),
 }
 if per_judge:

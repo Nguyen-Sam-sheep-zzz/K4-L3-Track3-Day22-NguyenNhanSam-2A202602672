@@ -1,0 +1,139 @@
+{
+  "source_zip": "Lab22_Core_Evidence.zip",
+  "zip_sha256": "da9f8b5197880222f424b09fd717173777377482c809c4624541c89b74a9f85b",
+  "files": [
+    {
+      "archive_path": "adapters/dpo/adapter_config.json",
+      "repo_path": "adapters/dpo/adapter_config.json",
+      "bytes": 1324,
+      "sha256": "aa9e2dd774bc2c67fe48eb30d50c56a25b08f62af157873611efd196d188bf6e"
+    },
+    {
+      "archive_path": "adapters/dpo/dpo_metrics.json",
+      "repo_path": "adapters/dpo/dpo_metrics.json",
+      "bytes": 868,
+      "sha256": "cf266b54455494c5306803323eea5f7dc668b20e2f1eaf9c30bc387f30f3eeb7"
+    },
+    {
+      "archive_path": "adapters/dpo/reward_history.json",
+      "repo_path": "adapters/dpo/reward_history.json",
+      "bytes": 15540,
+      "sha256": "bd893efc92fd0aeb9a6b71e306a56aff3bd85c8c5824f2ed7c57c157f438b782"
+    },
+    {
+      "archive_path": "adapters/dpo/split.json",
+      "repo_path": "adapters/dpo/split.json",
+      "bytes": 159,
+      "sha256": "965508ac8e1669a3f1b59a77433b1b87467b2d7f7d9ae8a9ff889015e74f0c50"
+    },
+    {
+      "archive_path": "adapters/sft-mini/adapter_config.json",
+      "repo_path": "adapters/sft-mini/adapter_config.json",
+      "bytes": 1339,
+      "sha256": "d7986fad55df57f12dc45d94b0a20b97ce37a88320ec021f7805d8387bcee031"
+    },
+    {
+      "archive_path": "adapters/sft-mini/sft_metrics.json",
+      "repo_path": "adapters/sft-mini/sft_metrics.json",
+      "bytes": 2401,
+      "sha256": "a657a6f89497a210355e44b23fd9cdffa204d482c5551bab667d9996429a42f0"
+    },
+    {
+      "archive_path": "data/eval/judge_results_api.json",
+      "repo_path": "data/eval/judge_results_api.json",
+      "bytes": 133755,
+      "sha256": "15901ef9d99de98f620396683de3a21306666d54174d3d038248574402d5e4eb"
+    },
+    {
+      "archive_path": "data/eval/judge_summary.json",
+      "repo_path": "data/eval/judge_summary.json",
+      "bytes": 1869,
+      "sha256": "9698f8204f96beb941c2f39345e1bb145d9014605b0195718df87e980611764d"
+    },
+    {
+      "archive_path": "data/eval/side_by_side.jsonl",
+      "repo_path": "data/eval/side_by_side.jsonl",
+      "bytes": 124215,
+      "sha256": "a4a292bd306942511d297ad0d282b146586216a26a52548edfdbc7404b343c35"
+    },
+    {
+      "archive_path": "data/pref/eval.parquet",
+      "repo_path": "data/pref/eval.parquet",
+      "bytes": 239938,
+      "sha256": "54e58e6033b838db373ddd0737d3ae99c606fd3932391b751cddf236149bcf26"
+    },
+    {
+      "archive_path": "data/pref/samples.json",
+      "repo_path": "data/pref/samples.json",
+      "bytes": 12165,
+      "sha256": "5abfb701f926172c943b7392b321c0a0db6eaff1514f70457b86cb79878599b5"
+    },
+    {
+      "archive_path": "data/pref/stats.json",
+      "repo_path": "data/pref/stats.json",
+      "bytes": 253,
+      "sha256": "5d13826f7857b291c20ef793df9bbf7c249c3c8349d225fce8e8dbd05cb75bd1"
+    },
+    {
+      "archive_path": "data/pref/train.parquet",
+      "repo_path": "data/pref/train.parquet",
+      "bytes": 1790956,
+      "sha256": "3f01b58d2b85b5ed6c296b053376419bcd245e98ce045b1cc762ce314fa41ef8"
+    },
+    {
+      "archive_path": "submission/REFLECTION.md",
+      "repo_path": "submission/colab_original/REFLECTION.md",
+      "bytes": 5816,
+      "sha256": "391a1879beee5441214167bce3d66c8388bad2730375e45955eba3ac8cadeb74"
+    },
+    {
+      "archive_path": "submission/runtime_config.json",
+      "repo_path": "submission/runtime_config.json",
+      "bytes": 758,
+      "sha256": "f26a7b3919c7fd550b1c1edf62193ae91b33599f43f0f3e5dc28a15c66247339"
+    },
+    {
+      "archive_path": "submission/screenshots/02-sft-loss.png",
+      "repo_path": "submission/screenshots/02-sft-loss.png",
+      "bytes": 37172,
+      "sha256": "98e69f534c389c6909f9c921975b9b1fc1a053a3b496b35569fb6dff34873af2"
+    },
+    {
+      "archive_path": "submission/screenshots/02b-pref-length.png",
+      "repo_path": "submission/screenshots/02b-pref-length.png",
+      "bytes": 24629,
+      "sha256": "1cda78191aa2a83d7b5fa94f79bb1eb44beeada878f35ae086c21c3560941abc"
+    },
+    {
+      "archive_path": "submission/screenshots/03-dpo-reward-curves.png",
+      "repo_path": "submission/screenshots/03-dpo-reward-curves.png",
+      "bytes": 126029,
+      "sha256": "e460eeb359c799fd2fb29fccae11c12861324bde356dbb32aa5756699c0378fb"
+    },
+    {
+      "archive_path": "submission/screenshots/04-side-by-side-table.png",
+      "repo_path": "submission/screenshots/04-side-by-side-table.png",
+      "bytes": 76680,
+      "sha256": "12599a59be5bad06da388c8927e9bda6523c9c6c16c56387ca71f53e3bab4706"
+    },
+    {
+      "archive_path": "submission/source_manifest.json",
+      "repo_path": "submission/source_manifest.json",
+      "bytes": 3825,
+      "sha256": "d55c7f861131da17d66f420b146b3256b6bb3da81784e84699605614ef88effe"
+    },
+    {
+      "archive_path": "submission/verify_colab.txt",
+      "repo_path": "submission/verify_colab.txt",
+      "bytes": 475,
+      "sha256": "d6ae7dcd900d91306084a48ba7792d3688c75cdbc77c0c4020249e7dacd2853c"
+    },
+    {
+      "archive_path": "submission/verify_status.json",
+      "repo_path": "submission/verify_status.json",
+      "bytes": 55,
+      "sha256": "44d32a9fbdc55e5630527b24be4f91060697ea1be2756b421e2e59d0031b3094"
+    }
+  ],
+  "preserved_raw_reflection": "submission/colab_original/REFLECTION.md"
+}

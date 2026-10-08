@@ -76,7 +76,16 @@ trainer = DPOTrainer(
     eval_dataset=eval_ds,
     processing_class=tokenizer,
 )
+import time
+
+torch.cuda.reset_peak_memory_stats()
+torch.cuda.synchronize()
+train_started = time.perf_counter()
 result = trainer.train()
+torch.cuda.synchronize()
+train_seconds = time.perf_counter() - train_started
+peak_allocated_gb = torch.cuda.max_memory_allocated() / 1e9
+peak_reserved_gb = torch.cuda.max_memory_reserved() / 1e9
 final_eval = trainer.evaluate()
 print(f"train loss {result.training_loss:.4f} · held-out reward accuracy "
       f"{final_eval.get('eval_rewards/accuracies', float('nan')):.3f}")
@@ -127,6 +136,13 @@ metrics = {
     "lr": C.DPO_LR,
     "loss_type": C.DPO_LOSS,
     "epochs": C.DPO_EPOCHS,
+    "seed": C.SEED,
+    "max_len": C.MAX_LEN,
+    "train_pairs": len(train_ds),
+    "eval_pairs": len(eval_ds),
+    "train_seconds": train_seconds,
+    "peak_allocated_gb": peak_allocated_gb,
+    "peak_reserved_gb": peak_reserved_gb,
     "final_train_loss": float(result.training_loss),
     "first_logged_loss": first_loss,
     "end_chosen_reward": last(train_hist, "rewards/chosen"),
@@ -139,6 +155,9 @@ metrics = {
     "diagnosis": label,
 }
 (C.DPO_ADAPTER / "dpo_metrics.json").write_text(json.dumps(metrics, indent=2))
+(C.DPO_ADAPTER / "reward_history.json").write_text(
+    json.dumps(trainer.state.log_history, indent=2), encoding="utf-8"
+)
 print(json.dumps(metrics, indent=2))
 
 # %% [markdown]

@@ -315,6 +315,28 @@ def has_judge_key(provider: str) -> bool:
     return bool(key and os.environ.get(key))
 
 
+def require_api_judge(provider: str, model: str) -> None:
+    """Fail before training/evaluation instead of falling back to a local RM."""
+    if provider not in API_KEYS:
+        raise RuntimeError("This run requires an API judge: openai, gemini or anthropic")
+    if not model or not model.strip():
+        raise RuntimeError("JUDGE_MODEL is not set")
+    if not has_judge_key(provider):
+        raise RuntimeError(f"{API_KEYS[provider]} is not set; add it to Colab Secrets")
+
+
+def api_sanity_accuracy(call: Caller, pairs=None) -> dict:
+    """Check Vietnamese sanity pairs in both A/B orders, counting failures as wrong."""
+    examples = SANITY_PAIRS if pairs is None else pairs
+    records = [judge_pair(prompt, bad, good, call) for prompt, good, bad in examples]
+    n = len(records)
+    return {
+        "n": n,
+        "accuracy": sum(r["winner"] == "dpo" for r in records) / n if n else None,
+        "position_consistency": sum(r["position_consistent"] is True for r in records) / n if n else None,
+    }
+
+
 def make_caller(provider: str, model: str, max_tokens: int = 200) -> Caller:
     """Build a judge caller. Raises if the provider, model, or key is missing."""
     if not model:
